@@ -39,7 +39,8 @@ function loadUserData(userObject) {
     user.onload = () => {
         console.log(user.responseText)
         console.log(user.status)
-        if (user.responseText !== "") { // got a user
+        if (user.responseText !== "" && user.status === 200) { // got a user
+            console.log(user)
             const userObj = JSON.parse(user.responseText);
             currentUser = userObj;
             switchScreen(2);

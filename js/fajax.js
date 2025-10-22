@@ -8,6 +8,7 @@ window.addEventListener("message", (event) => {
         const id = event.data.payloud.id;
         for (let i = 0; i < fajaxArray.length; i++) {
             if (fajaxArray[i].id === id) {
+                console.log(event.data.payloud, "ff")
                 fajaxArray[i].reciveFromServer(event.data.payloud);
                 fajaxArray.slice(i, 1);
                 return;

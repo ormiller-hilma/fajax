@@ -43,10 +43,10 @@ function Get(url) {
     return dataObject;
 }
 
-function Put(url, data, obj) {
+function Put(url, data) {
     // upadate
     const dataObject = {
-        responseText: data,
+        responseText: JSON.stringify(data),
         status: 200
     }
 
@@ -55,7 +55,7 @@ function Put(url, data, obj) {
     return dataObject;
 }
 
-function Delete(url, obj) {
+function Delete(url) {
     const dataObject = {
         responseText: data,
         status: 200
@@ -76,10 +76,16 @@ function Post(url, data, obj) {
     switch (url) {
         case "users/get-user-data":
             const userData = GetUser(data.username);
-            if (userData === null) break;
+            if (userData === null) {
+                dataObject.status = 400; // didn't find user
+                break
+            };
             const user = userData.user;
             if (user.username === data.username && user.password === data.password) {
                 dataObject.responseText = JSON.stringify(user);
+            }
+            else {
+                dataObject.status = 400; // incorrect user or password
             }
             break;
         case "users":
