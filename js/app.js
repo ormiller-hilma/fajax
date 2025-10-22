@@ -33,20 +33,7 @@ let currentUser = null;
 // test.open("PUT", "people/?name=Blompo");
 // test.send("person");
 
-
-
-function login() {
-    //const button = document.getElementsByTagName
-    const inputs = document.getElementsByTagName("input");
-    const username = inputs[0].value;
-    const password = inputs[1].value;
-    //console.log(username)
-
-    const userObject = {
-        username: username,
-        password: password
-    }
-
+function loadUserData(userObject) {
     const user = new FXMLHttpRequest();
     user.open("POST", "users/get-user-data");
     user.onload = () => {
@@ -62,6 +49,20 @@ function login() {
 
     }
     user.send(userObject);
+}
+
+function login() {
+    const inputs = document.getElementsByTagName("input");
+    const username = inputs[0].value;
+    const password = inputs[1].value;
+
+    const userObject = {
+        username: username,
+        password: password
+    }
+
+    loadUserData(userObject);
+
 }
 
 function logout() {
@@ -96,11 +97,11 @@ function addItem() {
         currentUser.shoppingList = newList;
 
         const user = new FXMLHttpRequest();
-        user.open("PUT", "people/?name=Blompo");
+        user.open("PUT", `users/?name=${currentUser.username}`);
+        user.onload = () => {
+            loadUserData(currentUser);
+        }
         user.send(currentUser);
-
-        // test.open("PUT", "people/?name=Blompo");
-        // test.send("person");
     }
 }
 
@@ -113,7 +114,12 @@ function intializeButtons(buttonAction) {
     if (addBtn !== null) {
         addBtn.addEventListener("click", addItem);
     }
-
+    const signupBtn = document.getElementById("signupBtn");
+    if (signupBtn !== null) {
+        signupBtn.addEventListener("click", () => {
+            switchScreen(1)
+        });
+    }
 }
 
 function switchScreen(index) {
@@ -133,5 +139,5 @@ function switchScreen(index) {
 // switchScreen(0)
 
 
-switchScreen(2);
-loadList(["a", "b", "c"]);
+switchScreen(0);
+//loadList(["a", "b", "c"]);

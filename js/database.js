@@ -30,17 +30,36 @@ export function DeleteData(url, index) {
     return 400;
 }
 
-export function ModifyData(url, index, data) {
-    if (Number.isNaN(index) === false) {
-        const urlArray = url.split("/");
-        urlArray.pop();
-        const key = urlArray.join("/");
+export function ModifyData(url, data) {
 
+    const urlArray = url.split("/");
+    const key = urlArray[0];
+    const endOfUrl = urlArray[urlArray.length - 1];
+    console.log(key, urlArray)
+
+    // check if string is number
+    if (isFinite(endOfUrl) && endOfUrl !== "") {
+        const index = Number(endOfUrl);
+        console.log(index, "index")
         const dataArray = JSON.parse(localStorage.getItem(key));
         dataArray[index] = data;
 
         localStorage.setItem(key, JSON.stringify(dataArray));
         return 200;
+    }
+    if (endOfUrl.startsWith("?name=")) {
+        const username = endOfUrl.slice(6); // removes "?name="
+        const userData = GetUser(username);
+        if (userData !== null) {
+            const index = userData.index;
+
+            const dataArray = JSON.parse(localStorage.getItem(key));
+            dataArray[index] = data;
+
+            localStorage.setItem(key, JSON.stringify(dataArray));
+            return 200;
+        }
+        return 400; // didnt find user
     }
     return 400; // error
 }
@@ -61,7 +80,7 @@ export function GetUser(username) {
     const userArr = JSON.parse(localStorage.getItem(usersKey));
     for (let i = 0; i < userArr.length; i++) {
         if (username === userArr[i].username) {
-            return userArr[i];
+            return { user: userArr[i], index: i };
         }
     }
     return null;

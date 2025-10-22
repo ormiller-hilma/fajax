@@ -9,29 +9,35 @@
     <!-- Loginn -->
     <template>
       <header><h1>Login</h1></header>
-      <form>
-        <label for="username">Username</label>
-        <input type="text" id="username" />
-        <label for="password">Password</label>
-        <input type="text" id="password" />
-        <button type="button" id="btn">Submit</button>
-      </form>
+      <label for="username">Username</label>
+      <input type="text" id="username" />
+      <label for="password">Password</label>
+      <input type="text" id="password" />
+      <button type="button" id="btn">Login</button>
+      <button type="button" id="signupBtn">Signup</button>
     </template>
     <!-- Sign Up -->
-    <template> </template>
+    <template>
+      <header><h1>Signup</h1></header>
+      <label for="username">Username</label>
+      <input type="text" id="username" />
+      <label for="password">Password</label>
+      <input type="text" id="password" />
+      <label for="password2">Confirm Password</label>
+      <input type="text" id="password2" />
+      <button type="button" id="btn">Signup</button>
+      <button type="button" id="haveAccountBtn">Already have an account</button>
+    </template>
     <!-- App -->
     <template>
       <header><h1>Shopping List</h1></header>
       <h2 id="greeting">Hello:</h2>
       <ol id="list"></ol>
-      <form>
-        <label for="listInput">Enter item</label>
-        <input type="text" id="listInput" />
-        <button type="button" id="addBtn">Add item</button>
-      </form>
-      <form>
-        <button type="button" id="btn">Logout</button>
-      </form>
+
+      <label for="listInput">Enter item</label>
+      <input type="text" id="listInput" />
+      <button type="button" id="addBtn">Add item</button>
+      <button type="button" id="btn">Logout</button>
     </template>
     <div id="container"></div>
   </body>

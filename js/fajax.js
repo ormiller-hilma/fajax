@@ -1,4 +1,5 @@
-import { SendToServer } from "../js/server.js"
+//import { SendToServer } from "../js/server.js"
+import { sendFromFajaxToNetwork } from "./network.js";
 
 export function FXMLHttpRequest() {
     this.responseText = "";
@@ -13,7 +14,7 @@ export function FXMLHttpRequest() {
         this._url = url;
     }
     this.send = (data) => {
-        SendToServer(this._method, this._url, data, this);
+        sendFromFajaxToNetwork(this._method, this._url, data, this);
     }
 
     // server sent a response

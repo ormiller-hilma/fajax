@@ -33,8 +33,7 @@ function Get(url, obj) {
 
 function Put(url, data, obj) {
     // upadate
-    const index = getUrlIndex(url);
-    obj.status = ModifyData(url, index, data);
+    obj.status = ModifyData(url, data);
 
     obj.reciveFromServer();
 }
@@ -49,8 +48,9 @@ function Delete(url, obj) {
 function Post(url, data, obj) {
     switch (url) {
         case "users/get-user-data":
-            const user = GetUser(data.username);
-            if (user === null) break;
+            const userData = GetUser(data.username);
+            if (userData === null) break;
+            const user = userData.user;
             if (user.username === data.username && user.password === data.password) {
                 obj.responseText = JSON.stringify(user);
             }
