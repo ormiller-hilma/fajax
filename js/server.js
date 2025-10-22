@@ -67,7 +67,7 @@ function Delete(url) {
     return dataObject;
 }
 
-function Post(url, data, obj) {
+function Post(url, data) {
     const dataObject = {
         responseText: data,
         status: 200

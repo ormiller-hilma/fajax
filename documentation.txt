@@ -1,0 +1,25 @@
+ 
+Create:
+ fajax.open("POST", "<path>"); // create file
+ fajax.send(<data>);
+
+Read:
+ fajax.open("GET", "<path>")  // get all
+ fajax.send();
+
+ fajax.open("GET", "<path>/index")  // get by index
+ fajax.send();
+
+ fajax.open("POST", "users/get-user-data"); // get user data if password and username are valid
+ fajax.send(user);
+
+Delete:
+ fajax.open("DELETE", "<path>/<index>"); // delete by index
+ fajax.send();
+
+Modify:
+ fajax.open("PUT", "<path>/<index>"); // modify by index
+ fajax.send(<data>);
+
+ fajax.open("PUT", "<path>/?name=Blompo"); // modify by name
+ fajax.send(<data>);

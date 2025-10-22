@@ -1,37 +1,7 @@
 import { FXMLHttpRequest } from "../js/fajax.js"
 
-const user1 = {
-    username: "Blompo",
-    password: "123",
-    shoppingList: []
-}
 
 let currentUser = null;
-
-// const test = new FXMLHttpRequest();
-// test.onload = () => {
-//     console.log("Loaded YAYYAYAYAY")
-//     console.log(test.responseText)
-//     console.log(test.status)
-// }
-
-// test.open("POST", "users/get-user-data");
-// test.send(user);
-
-// test.open("GET", "people1")
-// test.send();
-
-// test.open("PUT", "people/0");
-// test.send("person");
-
-// test.open("DELETE", "people/0");
-// test.send();
-
-
-
-
-// test.open("PUT", "people/?name=Blompo");
-// test.send("person");
 
 function loadUserData(userObject) {
     const user = new FXMLHttpRequest();
@@ -49,7 +19,6 @@ function loadUserData(userObject) {
             loadGreeting(currentUser.username);
             loadList(currentUser.shoppingList);
         }
-
     }
     user.send(userObject);
 }
@@ -139,8 +108,4 @@ function switchScreen(index) {
     intializeButtons(actions[index]);
 }
 
-// switchScreen(0)
-
-
 switchScreen(0);
-//loadList(["a", "b", "c"]);
