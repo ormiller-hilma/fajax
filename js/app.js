@@ -37,10 +37,12 @@ function loadUserData(userObject) {
     const user = new FXMLHttpRequest();
     user.open("POST", "users/get-user-data");
     user.onload = () => {
-        console.log(user.responseText)
-        console.log(user.status)
+        console.log(user)
+        console.log("STATUS", user.status)
+        if (user.status === 401) {
+            console.log("Couldn't Login");
+        }
         if (user.responseText !== "" && user.status === 200) { // got a user
-            console.log(user)
             const userObj = JSON.parse(user.responseText);
             currentUser = userObj;
             switchScreen(2);

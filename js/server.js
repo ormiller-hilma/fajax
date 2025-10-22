@@ -77,7 +77,7 @@ function Post(url, data, obj) {
         case "users/get-user-data":
             const userData = GetUser(data.username);
             if (userData === null) {
-                dataObject.status = 400; // didn't find user
+                dataObject.status = 401; // didn't find user
                 break
             };
             const user = userData.user;
@@ -85,7 +85,7 @@ function Post(url, data, obj) {
                 dataObject.responseText = JSON.stringify(user);
             }
             else {
-                dataObject.status = 400; // incorrect user or password
+                dataObject.status = 401; // incorrect user or password
             }
             break;
         case "users":
