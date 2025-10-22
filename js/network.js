@@ -4,6 +4,6 @@ export function sendFromFajaxToNetwork(method, url, data, fajax) {
     SendToServer(method, url, data, fajax)
 }
 
-export function sendFromServerToNetwork {
+export function sendFromServerToNetwork() {
 
 }
