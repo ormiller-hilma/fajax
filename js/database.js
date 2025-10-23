@@ -25,8 +25,9 @@ export function deleteData(url, index) {
         const key = urlArray.join("/");
 
         let dataArray = JSON.parse(localStorage.getItem(key));
-        dataArray[index] = null;
-        dataArray = removeNull(dataArray);
+        // dataArray[index] = null;
+        // dataArray = removeNull(dataArray);
+        dataArray.splice(index, 1);
 
         localStorage.setItem(key, JSON.stringify(dataArray));
         return 200;

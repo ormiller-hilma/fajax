@@ -188,4 +188,4 @@ function deleteUser(index) {
 
 switchScreen(0);
 
-// deleteUser(2);
+// deleteUser(1);
