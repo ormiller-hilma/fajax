@@ -1,7 +1,7 @@
 import { sendToServer } from "../js/server.js"
 
 // the odds that the data will get lost
-const dataLoseChance = 0;
+const dataLoseChance = 0.2;
 
 function sleep(ms) {
     const end = Date.now() + ms;
@@ -9,11 +9,11 @@ function sleep(ms) {
 }
 
 export function sendFromFajaxToNetwork(method, url, data) {
-    sleep(300);
+    sleep(Math.random() * 1500);
+
     if (Math.random() < dataLoseChance) {
-        sleep(3000);
+        sleep(1500);
         return;
     }
-
-    return sendToServer(method, url, data)
+    return sendToServer(method, url, data);
 }

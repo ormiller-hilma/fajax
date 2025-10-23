@@ -1,13 +1,11 @@
 import { FXMLHttpRequest } from "../js/fajax.js"
 
-
 let currentUser = null;
 
 function loadUserData(userObject) {
     const user = new FXMLHttpRequest();
     user.open("POST", "users/get-user-data");
     user.onload = () => {
-        //console.log(user)
         console.log("STATUS", user.status)
         if (user.status === 401) {
             console.log("Couldn't Login");
@@ -177,7 +175,6 @@ function switchScreen(index) {
 }
 
 function deleteUser(index) {
-
     const request = new FXMLHttpRequest();
     request.open("DELETE", `users/${index}`);
     request.onload = () => {
