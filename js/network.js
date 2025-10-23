@@ -12,7 +12,7 @@ export function sendFromFajaxToNetwork(method, url, data) {
     sleep(Math.random() * 1000);
 
     if (Math.random() < dataLoseChance) {
-        sleep(1500);
+        sleep(1200);
         return;
     }
     return sendToServer(method, url, data);

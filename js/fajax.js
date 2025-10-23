@@ -15,6 +15,7 @@ export class FXMLHttpRequest {
         this._method = method;
         this._url = url;
     }
+
     send(data) {
         setTimeout(() => {
             const fetchedData = sendFromFajaxToNetwork(this._method, this._url, data);
@@ -24,7 +25,7 @@ export class FXMLHttpRequest {
                 console.error("Timeout fajax didn't recive response in time")
                 this.onload();
             }
-        }, 800)
+        }, 700)
     }
 
     // server sent a response
