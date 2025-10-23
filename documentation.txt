@@ -14,7 +14,7 @@ Read:
  fajax.send(user);
 
 Delete:
- fajax.open("DELETE", "<path>/<index>"); // delete by index
+ fajax.open("DELETE", "<path>/<username>"); // delete by index
  fajax.send();
 
 Modify:
