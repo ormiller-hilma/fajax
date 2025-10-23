@@ -20,6 +20,6 @@ export function sendFromServerToNetwork(payload) {
     if (Math.random() < serverLosingChance) {
         return;
     }
-    sleep(500 + Math.random() * 2000);
+    sleep(20 + Math.random() * 1000);
     window.postMessage({ target: "fajax", payloud: payload }, "*");
 }

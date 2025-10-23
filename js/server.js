@@ -3,10 +3,10 @@ import { sendFromServerToNetwork } from "./network.js";
 
 window.addEventListener("message", (event) => {
     if (event.data.target === "server") {
-        const payload = event.data.payloud;
-        console.log(payload)
-        const dataObject = SendToServer(payload.method, payload.url, payload.data);
-        dataObject.id = payload.id;
+        const payloud = event.data.payloud;
+        console.log(payloud)
+        const dataObject = SendToServer(payloud.method, payloud.url, payloud.data);
+        dataObject.id = payloud.id;
         sendFromServerToNetwork(dataObject);
     }
 });
@@ -75,6 +75,7 @@ function Post(url, data) {
 
     switch (url) {
         case "users/get-user-data":
+            console.log(data)
             const userData = GetUser(data.username);
             if (userData === null) {
                 dataObject.status = 401; // didn't find user

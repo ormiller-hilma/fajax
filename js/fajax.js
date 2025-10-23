@@ -2,15 +2,13 @@ import { sendFromFajaxToNetwork } from "./network.js";
 
 const fajaxArray = [];
 
-function getNewId() {
+const getNewId = new function () {
     let id = 0;
     return () => {
         id++;
         return id;
     }
 }
-
-const idCounter = getNewId();
 
 window.addEventListener("message", (event) => {
     if (event.data.target === "fajax") {
@@ -30,7 +28,7 @@ export class FXMLHttpRequest {
         this.responseText = "";
         this.status = 0;
 
-        this.id = idCounter();
+        this.id = getNewId();
 
         this._method = "";
         this._url = "";
@@ -55,34 +53,3 @@ export class FXMLHttpRequest {
         this.onload();
     }
 }
-
-// export function FXMLHttpRequest() {
-//     this.responseText = "";
-//     this.status = 0;
-
-//     this.id = id;
-//     id++;
-
-//     this.onload = () => { };
-
-//     this._method = "";
-//     this._url = "";
-//     this.open = (method, url) => {
-//         this._method = method;
-//         this._url = url;
-//     }
-//     this.send = (data) => {
-//         sendFromFajaxToNetwork(this._method, this._url, data, this.id);
-//     }
-
-//     // server sent a response
-//     this.reciveFromServer = (fetchedData) => {
-//         //console.log("DATA FETCHED:", fetchedData);
-//         this.responseText = fetchedData.responseText;
-//         this.status = fetchedData.status;
-//         this.onload();
-//     }
-
-
-//     fajaxArray.push(this);
-// }

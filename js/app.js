@@ -34,7 +34,6 @@ function login() {
     }
 
     loadUserData(userObject);
-
 }
 
 function logout() {
@@ -42,7 +41,26 @@ function logout() {
 }
 
 function signup() {
+    const inputs = document.getElementsByTagName("input");
+    const username = inputs[0].value;
+    const password = inputs[1].value;
+    const password2 = inputs[2].value;
 
+    const userObject = {
+        username: username,
+        password: password,
+        shoppingList: []
+    }
+
+    if (password !== password2 || username === "" || password === "") return;
+
+    const createUserFajax = new FXMLHttpRequest();
+    createUserFajax.open("POST", "users");
+    createUserFajax.onload = () => {
+        loadUserData(userObject);
+    }
+
+    createUserFajax.send(userObject);
 }
 
 function loadGreeting(username) {
@@ -90,6 +108,12 @@ function intializeButtons(buttonAction) {
     if (signupBtn !== null) {
         signupBtn.addEventListener("click", () => {
             switchScreen(1)
+        });
+    }
+    const haveAccountBtn = document.getElementById("haveAccountBtn");
+    if (haveAccountBtn !== null) {
+        haveAccountBtn.addEventListener("click", () => {
+            switchScreen(0)
         });
     }
 }
