@@ -19,6 +19,7 @@ function loadUserData(userObject) {
             loadGreeting(currentUser.username);
             loadList(currentUser.shoppingList);
         }
+        setBtnState(true);
     }
     user.send(userObject);
 }
@@ -28,11 +29,17 @@ function login() {
     const username = inputs[0].value;
     const password = inputs[1].value;
 
+    if (username === "" || password === "") {
+        console.log("Please enter username and password")
+        return;
+    }
+
     const userObject = {
         username: username,
         password: password
     }
 
+    setBtnState(false);
     loadUserData(userObject);
 }
 
@@ -87,6 +94,8 @@ function addItem() {
     const listInput = document.getElementById("listInput");
     const item = listInput.value;
     if (item !== "" && currentUser !== null) {
+        setBtnState(false);
+
         const newList = [...currentUser.shoppingList];
         newList.push(item);
         currentUser.shoppingList = newList;
@@ -97,6 +106,24 @@ function addItem() {
             loadUserData(currentUser);
         }
         user.send(currentUser);
+    }
+}
+
+function deleteItem(index) {
+    setBtnState(false);
+    currentUser.shoppingList.splice(index, 1);
+    const deleteRequest = new FXMLHttpRequest();
+    deleteRequest.open("PUT", `users/?name=${currentUser.username}`);
+    deleteRequest.onload = () => {
+        loadUserData(currentUser);
+    }
+    deleteRequest.send(currentUser);
+}
+
+function setBtnState(state) {
+    const btns = document.getElementsByTagName("button");
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].disabled = !state;
     }
 }
 
@@ -124,13 +151,7 @@ function intializeButtons(buttonAction) {
     const delBtn = document.getElementById("delBtn");
     if (delBtn !== null) {
         delBtn.addEventListener("click", () => {
-            currentUser.shoppingList.shift();
-            const deleteRequest = new FXMLHttpRequest();
-            deleteRequest.open("PUT", `users/?name=${currentUser.username}`);
-            deleteRequest.onload = () => {
-                loadUserData(currentUser);
-            }
-            deleteRequest.send(currentUser);
+            deleteItem(0);
         });
     }
 }

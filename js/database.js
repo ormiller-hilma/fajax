@@ -39,7 +39,6 @@ export function ModifyData(url, data) {
     const urlArray = url.split("/");
     const key = urlArray[0];
     const endOfUrl = urlArray[urlArray.length - 1];
-    console.log(key, urlArray)
 
     // check if string is number
     if (isFinite(endOfUrl) && endOfUrl !== "") {

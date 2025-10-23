@@ -16,12 +16,15 @@ export class FXMLHttpRequest {
         this._url = url;
     }
     send(data) {
-        const fetchedData = sendFromFajaxToNetwork(this._method, this._url, data);
-        try {
-            this.reciveFromServer(fetchedData);
-        } catch (error) {
-            console.error("Timeout fajax didn't recive response in time")
-        }
+        setTimeout(() => {
+            const fetchedData = sendFromFajaxToNetwork(this._method, this._url, data);
+            try {
+                this.reciveFromServer(fetchedData);
+            } catch (error) {
+                console.error("Timeout fajax didn't recive response in time")
+                this.onload();
+            }
+        }, 2200)
 
     }
 
