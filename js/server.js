@@ -1,4 +1,4 @@
-import { SaveData, DeleteData, ModifyData, GetData, GetUser } from "./database.js";
+import { SaveData, deleteData, ModifyData, GetData, GetUser } from "./database.js";
 
 export function SendToServer(method, url, data) {
     switch (method) {
@@ -51,7 +51,7 @@ function Delete(url) {
     }
 
     const index = getUrlIndex(url);
-    dataObject.status = DeleteData(url, index);
+    dataObject.status = deleteData(url, index);
 
     return dataObject;
 }

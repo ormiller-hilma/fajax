@@ -59,14 +59,20 @@ function signup() {
         shoppingList: []
     }
 
-    if (password !== password2 || username === "" || password === "") return;
+    if (password !== password2 || username === "" || password === "") {
+        console.log("Please enter valid info")
+        return;
+    }
+
+    setBtnState(false)
 
     const createUserFajax = new FXMLHttpRequest();
     createUserFajax.open("POST", "users");
     createUserFajax.onload = () => {
         console.log("STATUS", createUserFajax.status);
         if (createUserFajax.status === 409) {
-            console.log("account already exists")
+            setBtnState(true);
+            console.log("account already exists");
             return;
         }
         loadUserData(userObject);
@@ -170,4 +176,19 @@ function switchScreen(index) {
     intializeButtons(actions[index]);
 }
 
+function deleteUser(index) {
+
+    const request = new FXMLHttpRequest();
+    request.open("DELETE", `users/${index}`);
+    request.onload = () => {
+        console.log("DELETE STATUS", request.status)
+        if (request.status === 200) {
+            console.log("Deleted at index " + index);
+        }
+    }
+    request.send();
+}
+
 switchScreen(0);
+
+// deleteUser(2);

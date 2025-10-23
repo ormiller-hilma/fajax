@@ -18,7 +18,7 @@ export function SaveData(key, data) {
 }
 
 
-export function DeleteData(url, index) {
+export function deleteData(url, index) {
     if (Number.isNaN(index) === false) {
         const urlArray = url.split("/");
         urlArray.pop();
