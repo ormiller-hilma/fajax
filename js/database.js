@@ -25,8 +25,6 @@ export function deleteData(url, index) {
         const key = urlArray.join("/");
 
         let dataArray = JSON.parse(localStorage.getItem(key));
-        // dataArray[index] = null;
-        // dataArray = removeNull(dataArray);
         dataArray.splice(index, 1);
 
         localStorage.setItem(key, JSON.stringify(dataArray));
@@ -88,6 +86,27 @@ export function getUser(username) {
         }
     }
     return null;
+}
+
+export function getUserData(data) {
+    const dataObject = {
+        responseText: "",
+        status: 200
+    }
+
+    const userData = getUser(data.username);
+    if (userData === null) {
+        dataObject.status = 401; // didn't find user
+        return dataObject;
+    }
+    const user = userData.user;
+    if (user.username === data.username && user.password === data.password) {
+        dataObject.responseText = JSON.stringify(user);
+    }
+    else {
+        dataObject.status = 401; // incorrect user or password
+    }
+    return dataObject;
 }
 
 function createArray(key) {

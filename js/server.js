@@ -1,4 +1,4 @@
-import { saveData, deleteData, modifyData, getData, getUser } from "./database.js";
+import { saveData, deleteData, modifyData, getData, getUser, getUserData } from "./database.js";
 
 export function sendToServer(method, url, data) {
     switch (method) {
@@ -63,19 +63,10 @@ function post(url, data) {
 
     switch (url) {
         case "users/get-user-data":
-            console.log(data)
-            const userData = getUser(data.username);
-            if (userData === null) {
-                dataObject.status = 401; // didn't find user
-                break
-            };
-            const user = userData.user;
-            if (user.username === data.username && user.password === data.password) {
-                dataObject.responseText = JSON.stringify(user);
-            }
-            else {
-                dataObject.status = 401; // incorrect user or password
-            }
+            console.log(data);
+            const userData = getUserData(data);
+            dataObject.responseText = userData.responseText;
+            dataObject.status = userData.status;
             break;
         case "users":
             dataObject.status = saveData(url, data);
