@@ -1,9 +1,13 @@
 export function SaveData(key, data) {
-    // TODO: return error if key is not in local storage
     createArray(key); // creates array in local storage if one doesn't exist
 
     const item = localStorage.getItem(key);
     let itemArray = JSON.parse(item)
+
+    for (let i = 0; i < itemArray.length; i++) {
+        if (itemArray[i].username === data.username)
+            return 409; // user already exists
+    }
 
     itemArray.push(data);
     itemArray = removeNull(itemArray);

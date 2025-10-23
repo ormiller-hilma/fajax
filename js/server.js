@@ -1,15 +1,4 @@
 import { SaveData, DeleteData, ModifyData, GetData, GetUser } from "./database.js";
-import { sendFromServerToNetwork } from "./network.js";
-
-window.addEventListener("message", (event) => {
-    if (event.data.target === "server") {
-        const payloud = event.data.payloud;
-        console.log(payloud)
-        const dataObject = SendToServer(payloud.method, payloud.url, payloud.data);
-        dataObject.id = payloud.id;
-        sendFromServerToNetwork(dataObject);
-    }
-});
 
 export function SendToServer(method, url, data) {
     switch (method) {
@@ -57,12 +46,12 @@ function Put(url, data) {
 
 function Delete(url) {
     const dataObject = {
-        responseText: data,
+        responseText: "",
         status: 200
     }
 
     const index = getUrlIndex(url);
-    dataObject.status = DeleteData(url, index)
+    dataObject.status = DeleteData(url, index);
 
     return dataObject;
 }
@@ -92,8 +81,8 @@ function Post(url, data) {
         case "users":
             dataObject.status = SaveData(url, data);
             break;
-
         default:
+            dataObject.status.status = 404; // invalid url
             break;
     }
 

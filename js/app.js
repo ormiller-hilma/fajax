@@ -7,7 +7,7 @@ function loadUserData(userObject) {
     const user = new FXMLHttpRequest();
     user.open("POST", "users/get-user-data");
     user.onload = () => {
-        console.log(user)
+        //console.log(user)
         console.log("STATUS", user.status)
         if (user.status === 401) {
             console.log("Couldn't Login");
@@ -57,6 +57,11 @@ function signup() {
     const createUserFajax = new FXMLHttpRequest();
     createUserFajax.open("POST", "users");
     createUserFajax.onload = () => {
+        console.log("STATUS", createUserFajax.status);
+        if (createUserFajax.status === 409) {
+            console.log("account already exists")
+            return;
+        }
         loadUserData(userObject);
     }
 
@@ -114,6 +119,18 @@ function intializeButtons(buttonAction) {
     if (haveAccountBtn !== null) {
         haveAccountBtn.addEventListener("click", () => {
             switchScreen(0)
+        });
+    }
+    const delBtn = document.getElementById("delBtn");
+    if (delBtn !== null) {
+        delBtn.addEventListener("click", () => {
+            currentUser.shoppingList.shift();
+            const deleteRequest = new FXMLHttpRequest();
+            deleteRequest.open("PUT", `users/?name=${currentUser.username}`);
+            deleteRequest.onload = () => {
+                loadUserData(currentUser);
+            }
+            deleteRequest.send(currentUser);
         });
     }
 }
