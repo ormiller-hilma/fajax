@@ -24,7 +24,7 @@ export class FXMLHttpRequest {
                 console.error("Timeout fajax didn't recive response in time")
                 this.onload();
             }
-        }, 2200)
+        }, 2000)
 
     }
 

@@ -1,24 +1,24 @@
-import { SaveData, deleteData, ModifyData, GetData, GetUser } from "./database.js";
+import { saveData, deleteData, modifyData, getData, getUser } from "./database.js";
 
-export function SendToServer(method, url, data) {
+export function sendToServer(method, url, data) {
     switch (method) {
         case "GET":
-            return Get(url);
+            return get(url);
         case "PUT":
-            return Put(url, data);
+            return put(url, data);
         case "POST":
-            return Post(url, data);
+            return post(url, data);
         case "DELETE":
-            return Delete(url);
+            return del(url);
         default:
             console.error("A valid method was not provided for FXMLHttpRequest")
             break;
     }
 }
 
-function Get(url) {
+function get(url) {
     const index = getUrlIndex(url);
-    const data = GetData(url, index);
+    const data = getData(url, index);
 
     const dataObject = {
         responseText: data,
@@ -32,19 +32,18 @@ function Get(url) {
     return dataObject;
 }
 
-function Put(url, data) {
-    // upadate
+function put(url, data) {
     const dataObject = {
         responseText: JSON.stringify(data),
         status: 200
     }
 
-    dataObject.status = ModifyData(url, data);
+    dataObject.status = modifyData(url, data);
 
     return dataObject;
 }
 
-function Delete(url) {
+function del(url) {
     const dataObject = {
         responseText: "",
         status: 200
@@ -56,7 +55,7 @@ function Delete(url) {
     return dataObject;
 }
 
-function Post(url, data) {
+function post(url, data) {
     const dataObject = {
         responseText: data,
         status: 200
@@ -65,7 +64,7 @@ function Post(url, data) {
     switch (url) {
         case "users/get-user-data":
             console.log(data)
-            const userData = GetUser(data.username);
+            const userData = getUser(data.username);
             if (userData === null) {
                 dataObject.status = 401; // didn't find user
                 break
@@ -79,7 +78,7 @@ function Post(url, data) {
             }
             break;
         case "users":
-            dataObject.status = SaveData(url, data);
+            dataObject.status = saveData(url, data);
             break;
         default:
             dataObject.status.status = 404; // invalid url

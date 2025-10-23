@@ -1,4 +1,4 @@
-import { SendToServer } from "../js/server.js"
+import { sendToServer } from "../js/server.js"
 
 // the odds that the data will get lost
 const dataLoseChance = 0;
@@ -15,5 +15,5 @@ export function sendFromFajaxToNetwork(method, url, data) {
         return;
     }
 
-    return SendToServer(method, url, data)
+    return sendToServer(method, url, data)
 }

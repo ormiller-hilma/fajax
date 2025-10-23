@@ -1,4 +1,4 @@
-export function SaveData(key, data) {
+export function saveData(key, data) {
     createArray(key); // creates array in local storage if one doesn't exist
 
     const item = localStorage.getItem(key);
@@ -34,7 +34,7 @@ export function deleteData(url, index) {
     return 400;
 }
 
-export function ModifyData(url, data) {
+export function modifyData(url, data) {
 
     const urlArray = url.split("/");
     const key = urlArray[0];
@@ -52,7 +52,7 @@ export function ModifyData(url, data) {
     }
     if (endOfUrl.startsWith("?name=")) {
         const username = endOfUrl.slice(6); // removes "?name="
-        const userData = GetUser(username);
+        const userData = getUser(username);
         if (userData !== null) {
             const index = userData.index;
 
@@ -67,7 +67,7 @@ export function ModifyData(url, data) {
     return 400; // error
 }
 
-export function GetData(url, index) {
+export function getData(url, index) {
     if (Number.isNaN(index) === false) {
         const urlArray = url.split("/");
         urlArray.pop();
@@ -78,7 +78,7 @@ export function GetData(url, index) {
     return JSON.parse(localStorage.getItem(url));
 }
 
-export function GetUser(username) {
+export function getUser(username) {
     const usersKey = "users";
     const userArr = JSON.parse(localStorage.getItem(usersKey));
     for (let i = 0; i < userArr.length; i++) {
