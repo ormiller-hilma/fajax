@@ -2,7 +2,7 @@ import { SendToServer } from "../js/server.js"
 
 // the odds that the data will get lost
 const serverLosingChance = 0;
-const fajaxLosingChance = 0;
+const fajaxLosingChance = 1;
 
 function sleep(ms) {
     const end = Date.now() + ms;
